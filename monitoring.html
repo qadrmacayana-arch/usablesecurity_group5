@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Access Monitoring — SecureAccess</title>
+<link rel="stylesheet" href="../style/shared.css">
+</head>
+<body data-page="monitoring">
+<div id="sidebar-overlay"></div>
+<div class="app-shell">
+  <aside id="sidebar"></aside>
+  <div class="main-area">
+    <div id="top-bar" data-title="Access Monitoring"></div>
+    <div class="page-content fade-in">
+
+      <div class="page-header">
+        <h1>Access Monitoring</h1>
+        <p>Monitor your active access permissions, expiration dates, and usage.</p>
+      </div>
+
+      <!-- Alert banner -->
+      <div style="background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.3);border-radius:10px;padding:14px 18px;margin-bottom:24px;display:flex;align-items:center;gap:12px;">
+        <svg width="18" height="18" fill="none" stroke="var(--c-orange)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        <p style="font-size:13px;color:var(--c-300);margin:0;"><strong style="color:var(--c-orange);">3 accesses expiring soon.</strong> Renew them before they expire to maintain uninterrupted access.</p>
+        <a href="submission-form.html" class="btn btn-ghost btn-sm" style="margin-left:auto;white-space:nowrap;">Request Renewal</a>
+      </div>
+
+      <!-- Active accesses grid -->
+      <div class="section-head"><h2>Active Access Permissions (4)</h2></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;" id="access-grid">
+
+        <!-- Card 1 -->
+        <div class="monitor-card">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:36px;height:36px;border-radius:8px;background:rgba(99,102,241,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="16" height="16" fill="none" stroke="var(--c-indigo-l)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+              </div>
+              <div>
+                <p style="font-size:14px;font-weight:700;color:var(--c-200);margin:0;">Digital Library</p>
+                <p style="font-size:11px;color:var(--c-500);margin:2px 0 0;">Read-only &bull; Standard</p>
+              </div>
+            </div>
+            <span class="badge b-green">Active</span>
+          </div>
+          <div style="margin-bottom:12px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+              <span style="font-size:11px;color:var(--c-500);">Expires Sep 20, 2026</span>
+              <span style="font-size:11px;color:var(--c-green);font-weight:600;">28 days left</span>
+            </div>
+            <div style="height:5px;background:var(--c-800);border-radius:99px;overflow:hidden;">
+              <div style="height:100%;width:93%;background:var(--c-green);border-radius:99px;transition:width .3s;"></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a href="credential.html" class="btn btn-ghost btn-sm">View Credential</a>
+            <button onclick="openRevoke('Digital Library')" class="btn btn-danger btn-sm">Revoke</button>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="monitor-card" style="border-color:rgba(249,115,22,.3);">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:36px;height:36px;border-radius:8px;background:rgba(96,165,250,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="16" height="16" fill="none" stroke="var(--c-blue)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+              </div>
+              <div>
+                <p style="font-size:14px;font-weight:700;color:var(--c-200);margin:0;">Student Records</p>
+                <p style="font-size:11px;color:var(--c-500);margin:2px 0 0;">Read-only &bull; Standard</p>
+              </div>
+            </div>
+            <span class="badge b-orange">Expiring</span>
+          </div>
+          <div style="margin-bottom:12px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+              <span style="font-size:11px;color:var(--c-500);">Expires Sep 9, 2026</span>
+              <span style="font-size:11px;color:var(--c-orange);font-weight:600;">5 days left</span>
+            </div>
+            <div style="height:5px;background:var(--c-800);border-radius:99px;overflow:hidden;">
+              <div style="height:100%;width:17%;background:var(--c-orange);border-radius:99px;"></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a href="submission-form.html" class="btn btn-ghost btn-sm">Renew</a>
+            <button onclick="openRevoke('Student Records')" class="btn btn-danger btn-sm">Revoke</button>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="monitor-card" style="border-color:rgba(249,115,22,.3);">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:36px;height:36px;border-radius:8px;background:rgba(167,139,250,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="16" height="16" fill="none" stroke="var(--c-purple)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+              </div>
+              <div>
+                <p style="font-size:14px;font-weight:700;color:var(--c-200);margin:0;">Research Database</p>
+                <p style="font-size:11px;color:var(--c-500);margin:2px 0 0;">Read/Write &bull; Restricted</p>
+              </div>
+            </div>
+            <span class="badge b-orange">Expiring</span>
+          </div>
+          <div style="margin-bottom:12px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+              <span style="font-size:11px;color:var(--c-500);">Expires Sep 16, 2026</span>
+              <span style="font-size:11px;color:var(--c-orange);font-weight:600;">12 days left</span>
+            </div>
+            <div style="height:5px;background:var(--c-800);border-radius:99px;overflow:hidden;">
+              <div style="height:100%;width:40%;background:var(--c-orange);border-radius:99px;"></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a href="submission-form.html" class="btn btn-ghost btn-sm">Renew</a>
+            <button onclick="openRevoke('Research Database')" class="btn btn-danger btn-sm">Revoke</button>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="monitor-card">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:36px;height:36px;border-radius:8px;background:rgba(52,211,153,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="16" height="16" fill="none" stroke="var(--c-green)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-2"/></svg>
+              </div>
+              <div>
+                <p style="font-size:14px;font-weight:700;color:var(--c-200);margin:0;">Course Portal</p>
+                <p style="font-size:11px;color:var(--c-500);margin:2px 0 0;">Read-only &bull; Standard</p>
+              </div>
+            </div>
+            <span class="badge b-green">Active</span>
+          </div>
+          <div style="margin-bottom:12px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+              <span style="font-size:11px;color:var(--c-500);">Expires Dec 1, 2026</span>
+              <span style="font-size:11px;color:var(--c-green);font-weight:600;">88 days left</span>
+            </div>
+            <div style="height:5px;background:var(--c-800);border-radius:99px;overflow:hidden;">
+              <div style="height:100%;width:88%;background:var(--c-green);border-radius:99px;"></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a href="credential.html" class="btn btn-ghost btn-sm">View Credential</a>
+            <button onclick="openRevoke('Course Portal')" class="btn btn-danger btn-sm">Revoke</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Revoke modal -->
+<div class="modal-backdrop" id="revoke-modal">
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-header">
+      <h2 style="font-size:16px;font-weight:700;color:var(--c-red);margin:0;">Revoke Access</h2>
+      <button class="close-btn" onclick="closeRevoke()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:14px;color:var(--c-300);margin:0 0 16px;">You are about to revoke your own access to <strong id="revoke-name" style="color:#fff;"></strong>. This action cannot be undone.</p>
+      <div style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);border-radius:8px;padding:12px;">
+        <p style="font-size:12px;color:var(--c-400);margin:0;">After revoking, you will lose access immediately and will need to submit a new request to regain it.</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeRevoke()">Cancel</button>
+      <button class="btn btn-danger" onclick="confirmRevoke()">Confirm Revoke</button>
+    </div>
+  </div>
+</div>
+
+<script src="../script/shared.js"></script>
+<script>
+var revokeTarget = '';
+function openRevoke(name) {
+  revokeTarget = name;
+  document.getElementById('revoke-name').textContent = name;
+  document.getElementById('revoke-modal').classList.add('open');
+}
+function closeRevoke() {
+  document.getElementById('revoke-modal').classList.remove('open');
+}
+function confirmRevoke() {
+  closeRevoke();
+  alert(revokeTarget + ' access has been revoked.');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notifications — SecureAccess</title>
+<link rel="stylesheet" href="../style/shared.css">
+</head>
+<body data-page="notifications">
+<div id="sidebar-overlay"></div>
+<div class="app-shell">
+  <aside id="sidebar"></aside>
+  <div class="main-area">
+    <div id="top-bar" data-title="Notifications"></div>
+    <div class="page-content fade-in">
+
+      <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:14px;">
+        <div>
+          <h1>Notifications</h1>
+          <p>System alerts, approval updates, and security notices.</p>
+        </div>
+        <button onclick="markAllRead()" class="btn btn-ghost btn-sm">Mark all as read</button>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="filter-tabs" style="margin-bottom:20px;">
+        <button class="ftab active" onclick="filterNotif('all',this)">All (6)</button>
+        <button class="ftab" onclick="filterNotif('unread',this)">Unread (3)</button>
+        <button class="ftab" onclick="filterNotif('approval',this)">Approvals</button>
+        <button class="ftab" onclick="filterNotif('expiry',this)">Expiry</button>
+        <button class="ftab" onclick="filterNotif('security',this)">Security</button>
+      </div>
+
+      <div class="card" style="padding:0 18px;" id="notif-list">
+
+        <div class="notif-item" data-type="approval" data-read="false" id="n0">
+          <div class="notif-dot" style="background:var(--c-indigo);"></div>
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+              <p style="font-size:13px;font-weight:600;color:var(--c-200);margin:0;">Access Request Pending Review</p>
+              <span style="font-size:11px;color:var(--c-600);white-space:nowrap;">2 hours ago</span>
+            </div>
+            <p style="font-size:12px;color:var(--c-500);margin:4px 0 0;">Your request for <strong style="color:var(--c-400);">Network Security Lab</strong> (REQ-2026-007) has been received and is currently under review by the administrator.</p>
+            <a href="request-pending.html" style="font-size:12px;color:var(--c-indigo-l);text-decoration:none;display:inline-block;margin-top:6px;">View Request →</a>
+          </div>
+        </div>
+
+        <div class="notif-item" data-type="expiry" data-read="false" id="n1">
+          <div class="notif-dot" style="background:var(--c-orange);"></div>
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+              <p style="font-size:13px;font-weight:600;color:var(--c-200);margin:0;">Access Expiring Soon — Student Records</p>
+              <span style="font-size:11px;color:var(--c-600);white-space:nowrap;">1 day ago</span>
+            </div>
+            <p style="font-size:12px;color:var(--c-500);margin:4px 0 0;">Your access to <strong style="color:var(--c-400);">Student Records System</strong> will expire in <strong style="color:var(--c-orange);">5 days</strong> (Sep 9, 2026). Submit a renewal request to maintain access.</p>
+            <a href="submission-form.html" style="font-size:12px;color:var(--c-indigo-l);text-decoration:none;display:inline-block;margin-top:6px;">Renew Access →</a>
+          </div>
+        </div>
+
+        <div class="notif-item" data-type="expiry" data-read="false" id="n2">
+          <div class="notif-dot" style="background:var(--c-orange);"></div>
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+              <p style="font-size:13px;font-weight:600;color:var(--c-200);margin:0;">Access Expiring Soon — Research Database</p>
+              <span style="font-size:11px;color:var(--c-600);white-space:nowrap;">2 days ago</span>
+            </div>
+            <p style="font-size:12px;color:var(--c-500);margin:4px 0 0;">Your access to <strong style="color:var(--c-400);">Research Database</strong> will expire in <strong style="color:var(--c-orange);">12 days</strong> (Sep 16, 2026). Consider renewing early.</p>
+            <a href="submission-form.html" style="font-size:12px;color:var(--c-indigo-l);text-decoration:none;display:inline-block;margin-top:6px;">Renew Access →</a>
+          </div>
+        </div>
+
+        <div class="notif-item" data-type="approval" data-read="true" id="n3">
+          <div class="notif-dot" style="background:var(--c-700);"></div>
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+              <p style="font-size:13px;font-weight:600;color:var(--c-500);margin:0;">Access Approved — Digital Library</p>
+              <span style="font-size:11px;color:var(--c-600);white-space:nowrap;">Aug 21, 2026</span>
+            </div>
+            <p style="font-size:12px;color:var(--c-600);margin:4px 0 0;">Your request for <strong style="color:var(--c-500);">Digital Library System</strong> has been approved. Access is now active until Sep 20, 2026.</p>
+            <a href="request-approved.html" style="font-size:12px;color:var(--c-600);text-decoration:none;display:inline-block;margin-top:6px;">View Credential →</a>
+          </div>
+        </div>
+
+        <div class="notif-item" data-type="approval" data-read="true" id="n4">
+          <div class="notif-dot" style="background:var(--c-700);"></div>
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+              <p style="font-size:13px;font-weight:600;color:var(--c-500);margin:0;">Request Denied — Admin Portal</p>
+              <span style="font-size:11px;color:var(--c-600);white-space:nowrap;">Aug 16, 2026</span>
+            </div>
+            <p style="font-size:12px;color:var(--c-600);margin:4px 0 0;">Your request for access to the <strong style="color:var(--c-500);">Admin Portal</strong> was denied. Admin access is restricted to faculty and staff. See rejection details for guidance.</p>
+            <a href="request-denied.html" style="font-size:12px;color:var(--c-600);text-decoration:none;display:inline-block;margin-top:6px;">View Decision →</a>
+          </div>
+        </div>
+
+        <div class="notif-item" data-type="security" data-read="true" id="n5">
+          <div class="notif-dot" style="background:var(--c-700);"></div>
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+              <p style="font-size:13px;font-weight:600;color:var(--c-500);margin:0;">New Login Detected</p>
+              <span style="font-size:11px;color:var(--c-600);white-space:nowrap;">Aug 10, 2026</span>
+            </div>
+            <p style="font-size:12px;color:var(--c-600);margin:4px 0 0;">A new login was recorded from <strong style="color:var(--c-500);">Manila, PH</strong> on Chrome / Windows at 9:14 AM. If this was not you, change your password immediately.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="../script/shared.js"></script>
+<script>
+var currentType = 'all';
+
+function filterNotif(type, btn) {
+  currentType = type;
+  document.querySelectorAll('.ftab').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  var items = document.querySelectorAll('#notif-list .notif-item');
+  items.forEach(function(item) {
+    var t = item.getAttribute('data-type');
+    var r = item.getAttribute('data-read');
+    var show = type === 'all' || type === t || (type === 'unread' && r === 'false');
+    item.style.display = show ? '' : 'none';
+  });
+}
+
+function markAllRead() {
+  var dots = document.querySelectorAll('.notif-dot');
+  dots.forEach(function(d){ d.style.background = 'var(--c-700)'; });
+  var items = document.querySelectorAll('#notif-list .notif-item');
+  items.forEach(function(item){
+    item.setAttribute('data-read','true');
+    var title = item.querySelector('p:first-child');
+    if (title) title.style.color = 'var(--c-500)';
+  });
+}
+</script>
+</body>
+</html>

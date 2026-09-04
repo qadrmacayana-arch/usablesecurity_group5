@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audit Logs — SecureAccess</title>
+<link rel="stylesheet" href="../style/shared.css">
+</head>
+<body data-page="audit-logs">
+<div id="sidebar-overlay"></div>
+<div class="app-shell">
+  <aside id="sidebar"></aside>
+  <div class="main-area">
+    <div id="top-bar" data-title="Audit Logs"></div>
+    <div class="page-content fade-in">
+
+      <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:14px;">
+        <div>
+          <h1>Audit Logs</h1>
+          <p>A complete tamper-proof trail of all actions associated with your account.</p>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <select class="sel" style="width:auto;padding:6px 12px;font-size:12px;" id="log-filter" onchange="filterLogs()">
+            <option value="">All Categories</option>
+            <option value="Authentication">Authentication</option>
+            <option value="Access Request">Access Request</option>
+            <option value="Access Control">Access Control</option>
+            <option value="Access Grant">Access Grant</option>
+          </select>
+          <button class="btn btn-ghost btn-sm" onclick="exportLogs()">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            Export
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;">
+        <div class="card" style="text-align:center;">
+          <p style="font-size:22px;font-weight:800;color:#fff;margin:0;">10</p>
+          <p style="font-size:11px;color:var(--c-500);margin:4px 0 0;">Total Events</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <p style="font-size:22px;font-weight:800;color:var(--c-indigo-l);margin:0;">4</p>
+          <p style="font-size:11px;color:var(--c-500);margin:4px 0 0;">Authentication</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <p style="font-size:22px;font-weight:800;color:var(--c-green);margin:0;">4</p>
+          <p style="font-size:11px;color:var(--c-500);margin:4px 0 0;">Access Grants</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <p style="font-size:22px;font-weight:800;color:var(--c-amber);margin:0;">2</p>
+          <p style="font-size:11px;color:var(--c-500);margin:4px 0 0;">Requests</p>
+        </div>
+      </div>
+
+      <div class="card" style="padding:0;overflow:hidden;">
+        <table class="tbl" id="audit-table">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Event</th>
+              <th>Category</th>
+              <th>Resource / Target</th>
+              <th>IP Address</th>
+              <th>Outcome</th>
+            </tr>
+          </thead>
+          <tbody id="audit-tbody">
+            <tr data-cat="Authentication">
+              <td class="mono" style="font-size:11px;color:var(--c-500);white-space:nowrap;">Sep 4, 2026 10:24 AM</td>
+              <td style="color:var(--c-200);font-size:13px;">User Login</td>
+              <td><span class="cat-tag cat-auth">Authentication</span></td>
+              <td style="color:var(--c-400);font-size:12px;">Portal Authentication</td>
+              <td class="mono" style="font-size:11px;color:var(--c-500);">192.168.1.42</td>
+              <td><span class="badge b-green">Success</span></td>
+            </tr>
+            <tr data-cat="Authentication">
+              <td class="mono" style="font-size:11px;color:var(--c-500);white-space:nowrap;">Sep 4, 2026 10:24 AM</td>
+              <td style="color:var(--c-200);font-size:13px;">OTP Verified</td>
+              <td><span class="cat-tag cat-auth">Authentication</span></td>
+              <td style="color:var(--c-400);font-size:12px;">2FA Verification</td>
+              <td class="mono" style="font-size:11px;color:var(--c-500);">192.168.1.42</td>
+              <td><span class="badge b-green">Success</span></td>
+            </tr>
+            <tr data-cat="Access Request">
+              <td class="mono" style="font-size:11px;color:var(--c-500);white-space:nowrap;">Sep 1, 2026 02:15 PM</td>
+              <td style="color:var(--c-200);font-size:13px;">Access Request Submitted</td>
+              <td><span class="cat-tag cat-request">Access Request</span></td>
+              <td style="color:var(--c-400);font-size:12px;">Network Security Lab</td>
+              <td class="mono" style="font-size:11px;color:var(--c-500);">10.0.0.15</td>
+              <td><span class="badge b-amber">Pending</span></td>
+            </tr>
+            <tr data-cat="Access Grant">
+              <td class="mono" style="font-size:11px;color:var(--c-500);white-space:nowrap;">Aug 21, 2026 09:00 AM</td>
+              <td style="color:var(--c-200);font-size:13px;">Access Granted</td>
+              <td><span class="cat-tag cat-grant">Access Grant</span></td>
+              <td style="color:var(--c-400);font-size:12px;">Digital Library System</td>
+              <td class="mono" style="font-size:11px;color:var(--c-500);">—</td>
+              <td><span class="badge b-green">Granted</span></td>
+            </tr>
+            <tr data-cat="Access Control">
+              <td class="mono" style="font-size:11px;color:var(--c-500);white-space:nowrap;">Aug 16, 2026 11:30 AM</td>
+              <td style="color:var(--c-200);font-size:13px;">Access Denied</td>
+              <td><span class="cat-tag cat-control">Access Control</span></td>
+              <td style="color:var(--c-400);font-size:12px;">Admin Portal</td>
+              <td class="mono" style="font-size:11px;color:var(--c-500);">—</td>
+              <td><span class="badge b-red">Denied</span></td>
+            </tr>
+            <tr data-cat="Access Grant">
+              <td class="mono" style="font-size:11px;color:var(--c-500);white-space:nowrap;">Aug 1, 2026 08:45 AM</td>
+              <td style="color:var(--c-200);font-size:13px;">Access Granted</td>
+              <td><span class="cat-tag cat-grant">Access Grant</span></td>
+              <td style="color:var(--c-400);font-size:12px;">Research Database</td>
+              <td class="mono" style="font-size:11px;color:var(--c-500);">—</td>
+              <td><span class="badge b-green">Granted</span></td>
+            </tr>
+            <tr data-cat="Access Request">
+              <td class="mono" style="font-size:11px;color:var(--c-500);white-space:nowrap;">Aug 15, 2026 10:00 AM</td>
+              <td style="color:var(--c-200);font-size:13px;">Access Request Submitted</td>
+              <td><span class="cat-tag cat-request">Access Request</span></td>
+              <td style="color:var(--c-400);font-size:12px;">Admin Portal</td>
+              <td class="mono" style="font-size:11px;color:var(--c-500);">10.0.0.15</td>
+              <td><span class="badge b-amber">Submitted</span></td>
+            </tr>
+            <tr data-cat="Access Grant">
+              <td class="mono" style="font-size:11px;color:var(--c-500);white-space:nowrap;">Jul 11, 2026 01:00 PM</td>
+              <td style="color:var(--c-200);font-size:13px;">Access Granted</td>
+              <td><span class="cat-tag cat-grant">Access Grant</span></td>
+              <td style="color:var(--c-400);font-size:12px;">Student Records System</td>
+              <td class="mono" style="font-size:11px;color:var(--c-500);">—</td>
+              <td><span class="badge b-green">Granted</span></td>
+            </tr>
+            <tr data-cat="Access Grant">
+              <td class="mono" style="font-size:11px;color:var(--c-500);white-space:nowrap;">Jun 1, 2026 08:00 AM</td>
+              <td style="color:var(--c-200);font-size:13px;">Access Granted</td>
+              <td><span class="cat-tag cat-grant">Access Grant</span></td>
+              <td style="color:var(--c-400);font-size:12px;">Course Management Portal</td>
+              <td class="mono" style="font-size:11px;color:var(--c-500);">—</td>
+              <td><span class="badge b-green">Granted</span></td>
+            </tr>
+            <tr data-cat="Authentication">
+              <td class="mono" style="font-size:11px;color:var(--c-500);white-space:nowrap;">Jun 1, 2026 07:58 AM</td>
+              <td style="color:var(--c-200);font-size:13px;">User Login</td>
+              <td><span class="cat-tag cat-auth">Authentication</span></td>
+              <td style="color:var(--c-400);font-size:12px;">Portal Authentication</td>
+              <td class="mono" style="font-size:11px;color:var(--c-500);">203.0.113.55</td>
+              <td><span class="badge b-green">Success</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="font-size:11px;color:var(--c-600);margin-top:12px;text-align:center;">Audit logs are read-only and cannot be modified. All events are timestamped and cryptographically signed.</p>
+
+    </div>
+  </div>
+</div>
+<script src="../script/shared.js"></script>
+<script>
+function filterLogs() {
+  var cat = document.getElementById('log-filter').value;
+  var rows = document.querySelectorAll('#audit-tbody tr');
+  rows.forEach(function(r) {
+    r.style.display = (!cat || r.getAttribute('data-cat') === cat) ? '' : 'none';
+  });
+}
+function exportLogs() {
+  alert('Audit log export initiated. You will receive a download link via email.');
+}
+</script>
+</body>
+</html>

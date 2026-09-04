@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eligibility Check — SecureAccess</title>
+<link rel="stylesheet" href="../style/shared.css">
+</head>
+<body>
+<div class="login-wrap">
+  <div class="login-card fade-in" style="max-width:480px;">
+    <!-- Logo -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:28px;">
+      <div style="width:44px;height:44px;border-radius:12px;background:var(--c-indigo-d);display:flex;align-items:center;justify-content:center;">
+        <svg width="22" height="22" fill="none" stroke="#fff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      </div>
+      <div>
+        <p style="font-size:16px;font-weight:800;color:#fff;margin:0;">SecureAccess</p>
+        <p style="font-size:11px;color:var(--c-500);margin:2px 0 0;">Eligibility Verification</p>
+      </div>
+    </div>
+
+    <!-- Step indicator -->
+    <div style="display:flex;align-items:center;gap:0;margin-bottom:28px;">
+      <div style="display:flex;align-items:center;flex-direction:column;gap:4px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--c-indigo);display:flex;align-items:center;justify-content:center;">
+          <svg width="14" height="14" fill="none" stroke="#fff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <span style="font-size:10px;color:var(--c-500);">Login</span>
+      </div>
+      <div style="flex:1;height:2px;background:var(--c-indigo);margin:0 8px 20px;"></div>
+      <div style="display:flex;align-items:center;flex-direction:column;gap:4px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--c-indigo);display:flex;align-items:center;justify-content:center;">
+          <svg width="14" height="14" fill="none" stroke="#fff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <span style="font-size:10px;color:var(--c-500);">Verify</span>
+      </div>
+      <div style="flex:1;height:2px;background:var(--c-indigo);margin:0 8px 20px;" id="bar3"></div>
+      <div style="display:flex;align-items:center;flex-direction:column;gap:4px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--c-indigo);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(99,102,241,.2);" id="step3-dot">
+          <span style="font-size:12px;font-weight:700;color:#fff;">3</span>
+        </div>
+        <span style="font-size:10px;color:var(--c-indigo-l);">Access</span>
+      </div>
+    </div>
+
+    <h2 style="font-size:20px;font-weight:800;color:#fff;margin:0 0 6px;">Eligibility Check</h2>
+    <p style="font-size:13px;color:var(--c-500);margin:0 0 24px;">Verifying your academic standing and account status before granting portal access.</p>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:28px;" id="checks">
+      <div class="elig-item" id="e0">
+        <div id="e0-icon" class="spin" style="width:20px;height:20px;border:2px solid var(--c-indigo);border-top-color:transparent;border-radius:50%;flex-shrink:0;"></div>
+        <div>
+          <p style="font-size:13px;font-weight:600;color:var(--c-200);margin:0;">Student Enrollment Status</p>
+          <p style="font-size:11px;color:var(--c-500);margin:2px 0 0;" id="e0-sub">Checking active enrollment…</p>
+        </div>
+      </div>
+      <div class="elig-item" id="e1" style="opacity:.4;">
+        <div id="e1-icon" style="width:20px;height:20px;border:2px solid var(--c-700);border-radius:50%;flex-shrink:0;"></div>
+        <div>
+          <p style="font-size:13px;font-weight:600;color:var(--c-400);margin:0;">Academic Standing</p>
+          <p style="font-size:11px;color:var(--c-600);margin:2px 0 0;" id="e1-sub">Pending…</p>
+        </div>
+      </div>
+      <div class="elig-item" id="e2" style="opacity:.4;">
+        <div id="e2-icon" style="width:20px;height:20px;border:2px solid var(--c-700);border-radius:50%;flex-shrink:0;"></div>
+        <div>
+          <p style="font-size:13px;font-weight:600;color:var(--c-400);margin:0;">Account Privileges</p>
+          <p style="font-size:11px;color:var(--c-600);margin:2px 0 0;" id="e2-sub">Pending…</p>
+        </div>
+      </div>
+      <div class="elig-item" id="e3" style="opacity:.4;">
+        <div id="e3-icon" style="width:20px;height:20px;border:2px solid var(--c-700);border-radius:50%;flex-shrink:0;"></div>
+        <div>
+          <p style="font-size:13px;font-weight:600;color:var(--c-400);margin:0;">Security Clearance</p>
+          <p style="font-size:11px;color:var(--c-600);margin:2px 0 0;" id="e3-sub">Pending…</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="result" style="display:none;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.25);border-radius:10px;padding:16px;text-align:center;margin-bottom:20px;">
+      <p style="font-size:14px;font-weight:700;color:#34d399;margin:0 0 4px;">All checks passed!</p>
+      <p style="font-size:12px;color:var(--c-500);margin:0;">Redirecting to your dashboard…</p>
+    </div>
+
+    <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="window.location.href='login.html'">← Back to Sign In</button>
+  </div>
+</div>
+
+<script>
+var checks = [
+  { label: 'Student Enrollment Status', sub: 'Currently enrolled — 3rd Year' },
+  { label: 'Academic Standing',          sub: 'Good standing — GPA 3.72' },
+  { label: 'Account Privileges',         sub: 'Portal access authorized' },
+  { label: 'Security Clearance',         sub: 'Standard clearance confirmed' }
+];
+
+var idx = 0;
+function checkTick() {
+  if (idx >= checks.length) {
+    document.getElementById('result').style.display = 'block';
+    setTimeout(function () { window.location.href = 'dashboard.html'; }, 1600);
+    return;
+  }
+
+  var el = document.getElementById('e' + idx);
+  var icon = document.getElementById('e' + idx + '-icon');
+  var sub = document.getElementById('e' + idx + '-sub');
+
+  // Complete current
+  if (idx > 0) {
+    el.style.opacity = '1';
+    icon.className = '';
+    icon.innerHTML = '<svg width="20" height="20" fill="none" stroke="#34d399" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>';
+    sub.style.color = 'var(--c-400)';
+    sub.textContent = checks[idx - 1].sub;
+    // Mark previous as done properly
+  }
+
+  // Actually: complete current step idx
+  if (idx < checks.length) {
+    // make current active
+    var cur = document.getElementById('e' + idx);
+    var curIcon = document.getElementById('e' + idx + '-icon');
+    var curSub = document.getElementById('e' + idx + '-sub');
+    cur.style.opacity = '1';
+    curIcon.style.border = '2px solid var(--c-indigo)';
+    curIcon.style.borderTopColor = 'transparent';
+    curIcon.className = 'spin';
+    curIcon.style.borderRadius = '50%';
+    curIcon.style.width = '20px';
+    curIcon.style.height = '20px';
+    curIcon.style.flexShrink = '0';
+    curSub.textContent = 'Checking…';
+    curSub.style.color = 'var(--c-500)';
+  }
+
+  setTimeout(function () {
+    var doneIcon = document.getElementById('e' + idx + '-icon');
+    var doneSub = document.getElementById('e' + idx + '-sub');
+    doneIcon.className = '';
+    doneIcon.style.border = 'none';
+    doneIcon.innerHTML = '<svg width="20" height="20" fill="none" stroke="#34d399" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>';
+    doneSub.textContent = checks[idx].sub;
+    doneSub.style.color = 'var(--c-400)';
+    idx++;
+    setTimeout(checkTick, 300);
+  }, 900);
+}
+
+setTimeout(checkTick, 400);
+</script>
+</body>
+</html>

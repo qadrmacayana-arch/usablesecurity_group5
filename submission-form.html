@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Submission Form — SecureAccess</title>
+<link rel="stylesheet" href="../style/shared.css">
+</head>
+<body data-page="submission-form">
+<div id="sidebar-overlay"></div>
+<div class="app-shell">
+  <aside id="sidebar"></aside>
+  <div class="main-area">
+    <div id="top-bar" data-title="New Access Request"></div>
+    <div class="page-content fade-in">
+
+      <div class="page-header">
+        <h1>New Access Request</h1>
+        <p>Complete the form below to request access to a university resource.</p>
+      </div>
+
+      <form id="access-form" onsubmit="submitForm(event)" style="max-width:860px;">
+
+        <!-- Personal Information -->
+        <div class="card" style="margin-bottom:20px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--c-indigo);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;">1</div>
+            <h2 style="font-size:15px;font-weight:700;color:var(--c-100);margin:0;">Personal Information</h2>
+          </div>
+          <div class="gap-grid-2" style="margin-bottom:14px;">
+            <div>
+              <label class="lbl">First Name <span style="color:var(--c-red);">*</span></label>
+              <input class="inp" type="text" placeholder="Alexandra" value="Alexandra" required>
+            </div>
+            <div>
+              <label class="lbl">Surname <span style="color:var(--c-red);">*</span></label>
+              <input class="inp" type="text" placeholder="Chen" value="Chen" required>
+            </div>
+          </div>
+          <div class="gap-grid-2" style="margin-bottom:14px;">
+            <div>
+              <label class="lbl">Middle Name</label>
+              <input class="inp" type="text" placeholder="Marie (optional)">
+            </div>
+            <div>
+              <label class="lbl">Suffix</label>
+              <select class="sel">
+                <option value="">— None —</option>
+                <option>Jr.</option>
+                <option>Sr.</option>
+                <option>II</option>
+                <option>III</option>
+              </select>
+            </div>
+          </div>
+          <div class="gap-grid-2" style="margin-bottom:14px;">
+            <div>
+              <label class="lbl">Age <span style="color:var(--c-red);">*</span></label>
+              <input class="inp" type="number" min="16" max="99" placeholder="20" value="20" required>
+            </div>
+            <div>
+              <label class="lbl">Gender <span style="color:var(--c-red);">*</span></label>
+              <select class="sel" required>
+                <option value="">Select gender</option>
+                <option selected>Female</option>
+                <option>Male</option>
+                <option>Non-binary</option>
+                <option>Prefer not to say</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="lbl">Phone Number <span style="color:var(--c-red);">*</span></label>
+            <input class="inp" type="tel" placeholder="+63 900 000 0000" value="+63 912 345 6789" required style="max-width:340px;">
+          </div>
+        </div>
+
+        <!-- Resource Selection -->
+        <div class="card" style="margin-bottom:20px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--c-indigo);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;">2</div>
+            <h2 style="font-size:15px;font-weight:700;color:var(--c-100);margin:0;">Resource &amp; Request Details</h2>
+          </div>
+
+          <div style="margin-bottom:14px;">
+            <label class="lbl">Request Form Type <span style="color:var(--c-red);">*</span></label>
+            <input class="inp" type="text" placeholder="e.g. Research Data Access, Lab Equipment, Library Database…" required>
+            <p style="font-size:11px;color:var(--c-600);margin:5px 0 0;">Describe the type of access you are requesting.</p>
+          </div>
+
+          <div class="gap-grid-2" style="margin-bottom:14px;">
+            <div>
+              <label class="lbl">Target Resource <span style="color:var(--c-red);">*</span></label>
+              <select class="sel" id="resource-sel" onchange="onResourceChange(this)" required>
+                <option value="">Select a resource</option>
+                <option value="lib">Digital Library System</option>
+                <option value="lab">Network Security Lab</option>
+                <option value="rdb">Research Database</option>
+                <option value="rec">Student Records System</option>
+                <option value="crs">Course Management Portal</option>
+                <option value="adm">Admin Portal</option>
+                <option value="fin">Financial Aid System</option>
+                <option value="hrm">HR Management System</option>
+              </select>
+            </div>
+            <div>
+              <label class="lbl">Permission Type <span style="color:var(--c-red);">*</span></label>
+              <select class="sel" required>
+                <option value="">Select type</option>
+                <option>Read-only</option>
+                <option>Read/Write</option>
+                <option>Full Access</option>
+                <option>View Only</option>
+                <option>Download/Export</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Resource info panel -->
+          <div id="res-info" style="display:none;background:rgba(249,115,22,.07);border:1px solid rgba(249,115,22,.25);border-radius:8px;padding:12px 14px;margin-bottom:14px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+              <svg width="14" height="14" fill="none" stroke="var(--c-orange)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+              <span id="res-level" style="font-size:12px;font-weight:600;color:var(--c-orange);"></span>
+            </div>
+            <p id="res-desc" style="font-size:12px;color:var(--c-500);margin:0;"></p>
+          </div>
+
+          <div class="gap-grid-2" style="margin-bottom:0;">
+            <div>
+              <label class="lbl">Access Duration <span style="color:var(--c-red);">*</span></label>
+              <select class="sel" required>
+                <option value="">Select duration</option>
+                <option>7 days</option>
+                <option>14 days</option>
+                <option>30 days</option>
+                <option>60 days</option>
+                <option>90 days</option>
+                <option>1 semester</option>
+                <option>1 academic year</option>
+              </select>
+            </div>
+            <div>
+              <label class="lbl">Urgency Level</label>
+              <select class="sel">
+                <option>Normal</option>
+                <option>Urgent</option>
+                <option>Critical</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Justification -->
+        <div class="card" style="margin-bottom:20px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--c-indigo);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;">3</div>
+            <h2 style="font-size:15px;font-weight:700;color:var(--c-100);margin:0;">Justification &amp; Message</h2>
+          </div>
+
+          <div style="margin-bottom:14px;">
+            <label class="lbl">Access Justification <span style="color:var(--c-red);">*</span></label>
+            <textarea class="textarea" rows="4" placeholder="Explain why you need this access, how it relates to your academic work, and any specific use cases…" required></textarea>
+          </div>
+
+          <div>
+            <label class="lbl">Additional Message / Concerns</label>
+            <textarea class="textarea" rows="3" placeholder="Any additional information, special circumstances, or concerns you want to communicate to the reviewer…"></textarea>
+          </div>
+        </div>
+
+        <!-- Terms -->
+        <div class="card" style="margin-bottom:20px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--c-indigo);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;">4</div>
+            <h2 style="font-size:15px;font-weight:700;color:var(--c-100);margin:0;">Terms &amp; Agreement</h2>
+          </div>
+
+          <div style="background:var(--c-800);border:1px solid var(--c-700);border-radius:8px;padding:14px;margin-bottom:16px;max-height:160px;overflow-y:auto;">
+            <p style="font-size:12px;color:var(--c-400);line-height:1.7;margin:0;">
+              <strong style="color:var(--c-200);">University Information Security Policy — Access Control Agreement</strong><br><br>
+              By submitting this request, I acknowledge and agree to the following:<br><br>
+              1. <strong>Authorized Use Only.</strong> I will use the granted access solely for legitimate academic or research purposes consistent with my enrolled program and course requirements.<br><br>
+              2. <strong>Confidentiality.</strong> I will not share, disclose, or transfer any credentials or data obtained through this access to unauthorized individuals.<br><br>
+              3. <strong>Least Privilege.</strong> I will request only the minimum access necessary to fulfill my academic needs.<br><br>
+              4. <strong>Monitoring.</strong> I understand that all access sessions are logged and monitored for security and compliance purposes.<br><br>
+              5. <strong>Revocation.</strong> Access may be revoked at any time if found to be in violation of university policy or misused.<br><br>
+              6. <strong>Accountability.</strong> I accept full responsibility for all actions performed under my credentials.
+            </p>
+          </div>
+
+          <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;" id="terms-label">
+            <input type="checkbox" id="terms-cb" onchange="toggleTerms()" style="width:18px;height:18px;margin-top:2px;accent-color:var(--c-indigo);flex-shrink:0;">
+            <span style="font-size:13px;color:var(--c-300);line-height:1.5;">I have read and agree to the University Information Security Policy and the terms stated above. I understand my obligations regarding authorized use, confidentiality, and accountability.</span>
+          </label>
+        </div>
+
+        <!-- Actions -->
+        <div style="display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap;">
+          <a href="access-requests.html" class="btn btn-ghost">Cancel</a>
+          <button type="submit" class="btn btn-primary" id="submit-btn" disabled style="opacity:.5;cursor:not-allowed;">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Submit Request
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Success modal -->
+<div class="modal-backdrop" id="success-modal">
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-body" style="text-align:center;padding:40px 32px;">
+      <div style="width:64px;height:64px;border-radius:50%;background:rgba(52,211,153,.15);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+        <svg width="32" height="32" fill="none" stroke="#34d399" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <h2 style="font-size:20px;font-weight:800;color:#fff;margin:0 0 8px;">Request Submitted!</h2>
+      <p style="font-size:13px;color:var(--c-500);margin:0 0 6px;">Your access request has been received and assigned to a reviewer.</p>
+      <p class="mono" style="font-size:13px;color:var(--c-indigo-l);margin:0 0 28px;">REQ-2026-008</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <a href="request-pending.html" class="btn btn-primary">View Request Status</a>
+        <a href="dashboard.html" class="btn btn-ghost">Go to Dashboard</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../script/shared.js"></script>
+<script>
+var RES_DATA = {
+  lib: { level: 'Standard', desc: 'Public academic resource — minimal approval required.' },
+  lab: { level: 'Restricted', desc: 'Network lab access requires supervisor endorsement.' },
+  rdb: { level: 'Restricted', desc: 'Research data — confidentiality agreement applies.' },
+  rec: { level: 'Standard', desc: 'View your own academic records only.' },
+  crs: { level: 'Standard', desc: 'Standard course management portal.' },
+  adm: { level: 'High Security', desc: 'Administrative access — requires dean-level approval. Extended review time expected.' },
+  fin: { level: 'Restricted', desc: 'Financial records — requires financial aid office review.' },
+  hrm: { level: 'Classified', desc: 'HR data is classified. Only faculty personnel may be approved. Student access is rarely granted.' },
+};
+
+function onResourceChange(sel) {
+  var v = sel.value;
+  var panel = document.getElementById('res-info');
+  if (v && RES_DATA[v]) {
+    document.getElementById('res-level').textContent = RES_DATA[v].level + ' Resource';
+    document.getElementById('res-desc').textContent = RES_DATA[v].desc;
+    panel.style.display = 'block';
+  } else {
+    panel.style.display = 'none';
+  }
+}
+
+function toggleTerms() {
+  var cb = document.getElementById('terms-cb');
+  var btn = document.getElementById('submit-btn');
+  btn.disabled = !cb.checked;
+  btn.style.opacity = cb.checked ? '1' : '.5';
+  btn.style.cursor = cb.checked ? 'pointer' : 'not-allowed';
+}
+
+function submitForm(e) {
+  e.preventDefault();
+  document.getElementById('success-modal').classList.add('open');
+}
+</script>
+</body>
+</html>

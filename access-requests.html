@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Access Requests — SecureAccess</title>
+<link rel="stylesheet" href="../style/shared.css">
+</head>
+<body data-page="access-requests">
+<div id="sidebar-overlay"></div>
+<div class="app-shell">
+  <aside id="sidebar"></aside>
+  <div class="main-area">
+    <div id="top-bar" data-title="Access Requests"></div>
+    <div class="page-content fade-in">
+
+      <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:14px;">
+        <div>
+          <h1 style="font-size:22px;font-weight:800;color:#fff;margin:0 0 4px;">Access Requests</h1>
+          <p style="font-size:13px;color:var(--c-500);margin:0;">Track and manage your permission requests.</p>
+        </div>
+        <a href="submission-form.html" class="btn btn-primary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          New Request
+        </a>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="filter-tabs" style="margin-bottom:18px;">
+        <button class="ftab active" onclick="filterReqs('all',this)">All (7)</button>
+        <button class="ftab" onclick="filterReqs('pending',this)">Pending (1)</button>
+        <button class="ftab" onclick="filterReqs('approved',this)">Approved (4)</button>
+        <button class="ftab" onclick="filterReqs('rejected',this)">Rejected (2)</button>
+      </div>
+
+      <div class="card" style="padding:0;overflow:hidden;">
+        <table class="tbl" id="req-table">
+          <thead>
+            <tr>
+              <th>Request ID</th>
+              <th>Resource</th>
+              <th>Type</th>
+              <th>Security</th>
+              <th>Submitted</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="req-tbody">
+            <tr data-status="pending">
+              <td class="mono" style="color:var(--c-400);font-size:12px;">REQ-2024-007</td>
+              <td style="color:var(--c-200);font-weight:600;">Network Security Lab</td>
+              <td style="color:var(--c-400);font-size:12px;">Research</td>
+              <td><span class="pip pip-restricted">Restricted</span></td>
+              <td style="color:var(--c-500);font-size:12px;">Sep 1, 2026</td>
+              <td><span class="badge b-amber">Pending Review</span></td>
+              <td><a href="request-pending.html" class="btn btn-ghost btn-sm">View</a></td>
+            </tr>
+            <tr data-status="approved">
+              <td class="mono" style="color:var(--c-400);font-size:12px;">REQ-2024-006</td>
+              <td style="color:var(--c-200);font-weight:600;">Digital Library</td>
+              <td style="color:var(--c-400);font-size:12px;">Academic</td>
+              <td><span class="pip pip-standard">Standard</span></td>
+              <td style="color:var(--c-500);font-size:12px;">Aug 20, 2026</td>
+              <td><span class="badge b-green">Approved</span></td>
+              <td><a href="request-approved.html" class="btn btn-ghost btn-sm">View</a></td>
+            </tr>
+            <tr data-status="rejected">
+              <td class="mono" style="color:var(--c-400);font-size:12px;">REQ-2024-005</td>
+              <td style="color:var(--c-200);font-weight:600;">Admin Portal</td>
+              <td style="color:var(--c-400);font-size:12px;">Administrative</td>
+              <td><span class="pip pip-high">High Security</span></td>
+              <td style="color:var(--c-500);font-size:12px;">Aug 15, 2026</td>
+              <td><span class="badge b-red">Rejected</span></td>
+              <td><a href="request-denied.html" class="btn btn-ghost btn-sm">View</a></td>
+            </tr>
+            <tr data-status="approved">
+              <td class="mono" style="color:var(--c-400);font-size:12px;">REQ-2024-004</td>
+              <td style="color:var(--c-200);font-weight:600;">Research Database</td>
+              <td style="color:var(--c-400);font-size:12px;">Research</td>
+              <td><span class="pip pip-restricted">Restricted</span></td>
+              <td style="color:var(--c-500);font-size:12px;">Jul 30, 2026</td>
+              <td><span class="badge b-green">Approved</span></td>
+              <td><a href="request-approved.html" class="btn btn-ghost btn-sm">View</a></td>
+            </tr>
+            <tr data-status="approved">
+              <td class="mono" style="color:var(--c-400);font-size:12px;">REQ-2024-003</td>
+              <td style="color:var(--c-200);font-weight:600;">Student Records</td>
+              <td style="color:var(--c-400);font-size:12px;">Academic</td>
+              <td><span class="pip pip-standard">Standard</span></td>
+              <td style="color:var(--c-500);font-size:12px;">Jul 10, 2026</td>
+              <td><span class="badge b-green">Approved</span></td>
+              <td><a href="request-approved.html" class="btn btn-ghost btn-sm">View</a></td>
+            </tr>
+            <tr data-status="rejected">
+              <td class="mono" style="color:var(--c-400);font-size:12px;">REQ-2024-002</td>
+              <td style="color:var(--c-200);font-weight:600;">Faculty HR Files</td>
+              <td style="color:var(--c-400);font-size:12px;">Administrative</td>
+              <td><span class="pip pip-classified">Classified</span></td>
+              <td style="color:var(--c-500);font-size:12px;">Jun 22, 2026</td>
+              <td><span class="badge b-red">Rejected</span></td>
+              <td><a href="request-denied.html" class="btn btn-ghost btn-sm">View</a></td>
+            </tr>
+            <tr data-status="approved">
+              <td class="mono" style="color:var(--c-400);font-size:12px;">REQ-2024-001</td>
+              <td style="color:var(--c-200);font-weight:600;">Course Portal</td>
+              <td style="color:var(--c-400);font-size:12px;">Academic</td>
+              <td><span class="pip pip-standard">Standard</span></td>
+              <td style="color:var(--c-500);font-size:12px;">Jun 1, 2026</td>
+              <td><span class="badge b-green">Approved</span></td>
+              <td><a href="request-approved.html" class="btn btn-ghost btn-sm">View</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="../script/shared.js"></script>
+<script>
+function filterReqs(filter, btn) {
+  document.querySelectorAll('.ftab').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  var rows = document.querySelectorAll('#req-tbody tr');
+  rows.forEach(function(r) {
+    var s = r.getAttribute('data-status');
+    r.style.display = (filter === 'all' || s === filter) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>

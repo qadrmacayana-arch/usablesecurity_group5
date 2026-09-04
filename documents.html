@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documents — SecureAccess</title>
+<link rel="stylesheet" href="../style/shared.css">
+</head>
+<body data-page="documents">
+<div id="sidebar-overlay"></div>
+<div class="app-shell">
+  <aside id="sidebar"></aside>
+  <div class="main-area">
+    <div id="top-bar" data-title="Documents"></div>
+    <div class="page-content fade-in">
+
+      <div class="page-header">
+        <h1>Documents</h1>
+        <p>Your academic and identity documents stored securely in the portal.</p>
+      </div>
+
+      <!-- Search row -->
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
+        <div style="position:relative;flex:1;max-width:320px;">
+          <svg style="position:absolute;left:10px;top:50%;transform:translateY(-50%);pointer-events:none;" width="14" height="14" fill="none" stroke="var(--c-500)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input class="inp" type="text" placeholder="Search documents…" style="padding-left:34px;" oninput="searchDocs(this)">
+        </div>
+        <div class="filter-tabs">
+          <button class="ftab active" onclick="filterDocs('all',this)">All</button>
+          <button class="ftab" onclick="filterDocs('academic',this)">Academic</button>
+          <button class="ftab" onclick="filterDocs('identity',this)">Identity</button>
+          <button class="ftab" onclick="filterDocs('request',this)">Requests</button>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;" id="doc-grid">
+
+        <div class="doc-card" data-cat="academic" data-name="Certificate of Enrollment" onclick="previewDoc('Certificate of Enrollment')">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <div style="width:38px;height:38px;border-radius:8px;background:rgba(52,211,153,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" fill="none" stroke="var(--c-green)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div>
+              <p style="font-size:13px;font-weight:700;color:var(--c-200);margin:0;">Certificate of Enrollment</p>
+              <p style="font-size:11px;color:var(--c-500);margin:2px 0 0;">Academic</p>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:11px;color:var(--c-600);">PDF &bull; 1st Sem 2026</span>
+            <span class="badge b-green">Valid</span>
+          </div>
+        </div>
+
+        <div class="doc-card" data-cat="identity" data-name="Student ID" onclick="previewDoc('Student ID')">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <div style="width:38px;height:38px;border-radius:8px;background:rgba(99,102,241,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" fill="none" stroke="var(--c-indigo-l)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"/></svg>
+            </div>
+            <div>
+              <p style="font-size:13px;font-weight:700;color:var(--c-200);margin:0;">Student ID Copy</p>
+              <p style="font-size:11px;color:var(--c-500);margin:2px 0 0;">Identity</p>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:11px;color:var(--c-600);">PNG &bull; 2024–2025</span>
+            <span class="badge b-green">Valid</span>
+          </div>
+        </div>
+
+        <div class="doc-card" data-cat="academic" data-name="Official Transcript of Records" onclick="previewDoc('Official Transcript of Records')">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <div style="width:38px;height:38px;border-radius:8px;background:rgba(96,165,250,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" fill="none" stroke="var(--c-blue)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <div>
+              <p style="font-size:13px;font-weight:700;color:var(--c-200);margin:0;">Official Transcript</p>
+              <p style="font-size:11px;color:var(--c-500);margin:2px 0 0;">Academic</p>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:11px;color:var(--c-600);">PDF &bull; As of Jul 2026</span>
+            <span class="badge b-green">Valid</span>
+          </div>
+        </div>
+
+        <div class="doc-card" data-cat="identity" data-name="Government ID" onclick="previewDoc('Government ID')">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <div style="width:38px;height:38px;border-radius:8px;background:rgba(251,191,36,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" fill="none" stroke="var(--c-amber)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            </div>
+            <div>
+              <p style="font-size:13px;font-weight:700;color:var(--c-200);margin:0;">Government-Issued ID</p>
+              <p style="font-size:11px;color:var(--c-500);margin:2px 0 0;">Identity</p>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:11px;color:var(--c-600);">PDF &bull; Expires 2028</span>
+            <span class="badge b-green">Valid</span>
+          </div>
+        </div>
+
+        <div class="doc-card" data-cat="request" data-name="Access Request Form REQ-2026-006" onclick="previewDoc('Access Request Form REQ-2026-006')">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <div style="width:38px;height:38px;border-radius:8px;background:rgba(167,139,250,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" fill="none" stroke="var(--c-purple)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+            </div>
+            <div>
+              <p style="font-size:13px;font-weight:700;color:var(--c-200);margin:0;">Access Request Form</p>
+              <p style="font-size:11px;color:var(--c-500);margin:2px 0 0;">Requests &bull; REQ-2026-006</p>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:11px;color:var(--c-600);">PDF &bull; Aug 20, 2026</span>
+            <span class="badge b-green">Approved</span>
+          </div>
+        </div>
+
+        <div class="doc-card" data-cat="request" data-name="Access Request Form REQ-2026-007" onclick="previewDoc('Access Request Form REQ-2026-007')">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <div style="width:38px;height:38px;border-radius:8px;background:rgba(251,191,36,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" fill="none" stroke="var(--c-amber)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+            </div>
+            <div>
+              <p style="font-size:13px;font-weight:700;color:var(--c-200);margin:0;">Access Request Form</p>
+              <p style="font-size:11px;color:var(--c-500);margin:2px 0 0;">Requests &bull; REQ-2026-007</p>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:11px;color:var(--c-600);">PDF &bull; Sep 1, 2026</span>
+            <span class="badge b-amber">Pending</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../script/shared.js"></script>
+<script>
+function filterDocs(cat, btn) {
+  document.querySelectorAll('.ftab').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('#doc-grid .doc-card').forEach(function(c) {
+    c.style.display = (cat === 'all' || c.getAttribute('data-cat') === cat) ? '' : 'none';
+  });
+}
+function searchDocs(inp) {
+  var q = inp.value.toLowerCase();
+  document.querySelectorAll('#doc-grid .doc-card').forEach(function(c) {
+    var name = c.getAttribute('data-name').toLowerCase();
+    c.style.display = name.includes(q) ? '' : 'none';
+  });
+}
+function previewDoc(name) {
+  alert('Opening preview: ' + name);
+}
+</script>
+</body>
+</html>

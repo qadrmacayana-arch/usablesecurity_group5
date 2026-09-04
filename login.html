@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — SecureAccess Student Portal</title>
+<link rel="stylesheet" href="../style/shared.css">
+</head>
+<body>
+<div class="login-wrap">
+  <div class="login-card fade-in">
+    <!-- Logo -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:32px;">
+      <div style="width:44px;height:44px;border-radius:12px;background:var(--c-indigo-d);display:flex;align-items:center;justify-content:center;">
+        <svg width="22" height="22" fill="none" stroke="#fff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      </div>
+      <div>
+        <p style="font-size:16px;font-weight:800;color:#fff;margin:0;">SecureAccess</p>
+        <p style="font-size:11px;color:var(--c-500);margin:2px 0 0;">Student Permission Portal</p>
+      </div>
+    </div>
+
+    <h1 style="font-size:22px;font-weight:800;color:#fff;margin:0 0 6px;">Sign in</h1>
+    <p style="font-size:13px;color:var(--c-500);margin:0 0 28px;">Access your Student Permission Management portal.</p>
+
+    <form id="login-form" onsubmit="handleLogin(event)">
+      <div style="margin-bottom:16px;">
+        <label class="lbl">Student ID</label>
+        <input class="inp" type="text" id="student-id" placeholder="e.g. STU-2024-0847" value="STU-2024-0847">
+      </div>
+      <div style="margin-bottom:24px;">
+        <label class="lbl">Password</label>
+        <div style="position:relative;">
+          <input class="inp" type="password" id="password" placeholder="Enter your password" value="••••••••" style="padding-right:42px;">
+          <button type="button" onclick="togglePw()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--c-500);cursor:pointer;" id="pw-eye">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="login-error" style="display:none;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);border-radius:8px;padding:10px 14px;margin-bottom:16px;color:var(--c-red);font-size:13px;"></div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:11px;" id="login-btn">
+        <span id="btn-text">Sign In</span>
+        <svg id="btn-spin" class="spin" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:none;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+      </button>
+    </form>
+
+    <hr class="divider" style="margin-top:28px;">
+    <p style="text-align:center;font-size:12px;color:var(--c-600);">
+      Authorized personnel only &bull; All sessions are monitored and logged<br>
+      University Information Security Policy applies
+    </p>
+  </div>
+</div>
+
+<script>
+var pwVisible = false;
+function togglePw() {
+  pwVisible = !pwVisible;
+  var f = document.getElementById('password');
+  f.type = pwVisible ? 'text' : 'password';
+}
+
+function handleLogin(e) {
+  e.preventDefault();
+  var id = document.getElementById('student-id').value.trim();
+  var pw = document.getElementById('password').value;
+  var err = document.getElementById('login-error');
+  err.style.display = 'none';
+
+  if (!id || !pw) {
+    err.textContent = 'Please enter your Student ID and password.';
+    err.style.display = 'block';
+    return;
+  }
+
+  // Simulate auth
+  var btn = document.getElementById('login-btn');
+  document.getElementById('btn-text').textContent = 'Signing in…';
+  document.getElementById('btn-spin').style.display = 'inline-block';
+  btn.disabled = true;
+
+  setTimeout(function () {
+    window.location.href = 'verify.html';
+  }, 1200);
+}
+</script>
+</body>
+</html>

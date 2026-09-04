@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request History — SecureAccess</title>
+<link rel="stylesheet" href="../style/shared.css">
+</head>
+<body data-page="history">
+<div id="sidebar-overlay"></div>
+<div class="app-shell">
+  <aside id="sidebar"></aside>
+  <div class="main-area">
+    <div id="top-bar" data-title="Request History"></div>
+    <div class="page-content fade-in">
+
+      <div class="page-header">
+        <h1>Request History</h1>
+        <p>A complete record of all your access permission requests.</p>
+      </div>
+
+      <!-- Stats row -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;">
+        <div style="background:var(--c-900);border:1px solid var(--c-800);border-radius:var(--r);padding:14px 18px;text-align:center;">
+          <p style="font-size:24px;font-weight:800;color:#fff;margin:0;">7</p>
+          <p style="font-size:11px;color:var(--c-500);margin:4px 0 0;">Total</p>
+        </div>
+        <div style="background:var(--c-900);border:1px solid rgba(52,211,153,.2);border-radius:var(--r);padding:14px 18px;text-align:center;">
+          <p style="font-size:24px;font-weight:800;color:#34d399;margin:0;">4</p>
+          <p style="font-size:11px;color:var(--c-500);margin:4px 0 0;">Approved</p>
+        </div>
+        <div style="background:var(--c-900);border:1px solid rgba(251,191,36,.2);border-radius:var(--r);padding:14px 18px;text-align:center;">
+          <p style="font-size:24px;font-weight:800;color:var(--c-amber);margin:0;">1</p>
+          <p style="font-size:11px;color:var(--c-500);margin:4px 0 0;">Pending</p>
+        </div>
+        <div style="background:var(--c-900);border:1px solid rgba(248,113,113,.2);border-radius:var(--r);padding:14px 18px;text-align:center;">
+          <p style="font-size:24px;font-weight:800;color:var(--c-red);margin:0;">2</p>
+          <p style="font-size:11px;color:var(--c-500);margin:4px 0 0;">Rejected</p>
+        </div>
+      </div>
+
+      <!-- Filters row -->
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap;">
+        <div class="filter-tabs">
+          <button class="ftab active" onclick="filterHist('all',this)">All</button>
+          <button class="ftab" onclick="filterHist('approved',this)">Approved</button>
+          <button class="ftab" onclick="filterHist('pending',this)">Pending</button>
+          <button class="ftab" onclick="filterHist('rejected',this)">Rejected</button>
+        </div>
+        <select class="sel" style="width:auto;padding:5px 12px;font-size:12px;" onchange="filterYear(this)">
+          <option value="">All Years</option>
+          <option>2026</option>
+          <option>2025</option>
+        </select>
+      </div>
+
+      <div class="card" style="padding:0;overflow:hidden;">
+        <table class="tbl" id="hist-table">
+          <thead>
+            <tr>
+              <th>Request ID</th>
+              <th>Resource</th>
+              <th>Type</th>
+              <th>Permission</th>
+              <th>Submitted</th>
+              <th>Decided</th>
+              <th>Status</th>
+              <th>Detail</th>
+            </tr>
+          </thead>
+          <tbody id="hist-tbody">
+            <tr data-status="pending" data-year="2026">
+              <td class="mono" style="font-size:11px;color:var(--c-400);">REQ-2026-007</td>
+              <td style="color:var(--c-200);font-weight:600;">Network Security Lab</td>
+              <td style="font-size:12px;color:var(--c-400);">Research</td>
+              <td style="font-size:12px;color:var(--c-400);">Read/Write</td>
+              <td style="font-size:12px;color:var(--c-500);">Sep 1, 2026</td>
+              <td style="font-size:12px;color:var(--c-600);">—</td>
+              <td><span class="badge b-amber">Pending</span></td>
+              <td><a href="request-pending.html" class="btn btn-ghost btn-sm">View</a></td>
+            </tr>
+            <tr data-status="approved" data-year="2026">
+              <td class="mono" style="font-size:11px;color:var(--c-400);">REQ-2026-006</td>
+              <td style="color:var(--c-200);font-weight:600;">Digital Library</td>
+              <td style="font-size:12px;color:var(--c-400);">Academic</td>
+              <td style="font-size:12px;color:var(--c-400);">Read-only</td>
+              <td style="font-size:12px;color:var(--c-500);">Aug 20, 2026</td>
+              <td style="font-size:12px;color:var(--c-500);">Aug 21, 2026</td>
+              <td><span class="badge b-green">Approved</span></td>
+              <td><a href="request-approved.html" class="btn btn-ghost btn-sm">View</a></td>
+            </tr>
+            <tr data-status="rejected" data-year="2026">
+              <td class="mono" style="font-size:11px;color:var(--c-400);">REQ-2026-005</td>
+              <td style="color:var(--c-200);font-weight:600;">Admin Portal</td>
+              <td style="font-size:12px;color:var(--c-400);">Administrative</td>
+              <td style="font-size:12px;color:var(--c-400);">Full Access</td>
+              <td style="font-size:12px;color:var(--c-500);">Aug 15, 2026</td>
+              <td style="font-size:12px;color:var(--c-500);">Aug 16, 2026</td>
+              <td><span class="badge b-red">Rejected</span></td>
+              <td><a href="request-denied.html" class="btn btn-ghost btn-sm">View</a></td>
+            </tr>
+            <tr data-status="approved" data-year="2026">
+              <td class="mono" style="font-size:11px;color:var(--c-400);">REQ-2026-004</td>
+              <td style="color:var(--c-200);font-weight:600;">Research Database</td>
+              <td style="font-size:12px;color:var(--c-400);">Research</td>
+              <td style="font-size:12px;color:var(--c-400);">Read/Write</td>
+              <td style="font-size:12px;color:var(--c-500);">Jul 30, 2026</td>
+              <td style="font-size:12px;color:var(--c-500);">Aug 1, 2026</td>
+              <td><span class="badge b-green">Approved</span></td>
+              <td><a href="request-approved.html" class="btn btn-ghost btn-sm">View</a></td>
+            </tr>
+            <tr data-status="approved" data-year="2026">
+              <td class="mono" style="font-size:11px;color:var(--c-400);">REQ-2026-003</td>
+              <td style="color:var(--c-200);font-weight:600;">Student Records</td>
+              <td style="font-size:12px;color:var(--c-400);">Academic</td>
+              <td style="font-size:12px;color:var(--c-400);">Read-only</td>
+              <td style="font-size:12px;color:var(--c-500);">Jul 10, 2026</td>
+              <td style="font-size:12px;color:var(--c-500);">Jul 11, 2026</td>
+              <td><span class="badge b-green">Approved</span></td>
+              <td><a href="request-approved.html" class="btn btn-ghost btn-sm">View</a></td>
+            </tr>
+            <tr data-status="rejected" data-year="2026">
+              <td class="mono" style="font-size:11px;color:var(--c-400);">REQ-2026-002</td>
+              <td style="color:var(--c-200);font-weight:600;">Faculty HR Files</td>
+              <td style="font-size:12px;color:var(--c-400);">Administrative</td>
+              <td style="font-size:12px;color:var(--c-400);">View Only</td>
+              <td style="font-size:12px;color:var(--c-500);">Jun 22, 2026</td>
+              <td style="font-size:12px;color:var(--c-500);">Jun 23, 2026</td>
+              <td><span class="badge b-red">Rejected</span></td>
+              <td><a href="request-denied.html" class="btn btn-ghost btn-sm">View</a></td>
+            </tr>
+            <tr data-status="approved" data-year="2026">
+              <td class="mono" style="font-size:11px;color:var(--c-400);">REQ-2026-001</td>
+              <td style="color:var(--c-200);font-weight:600;">Course Portal</td>
+              <td style="font-size:12px;color:var(--c-400);">Academic</td>
+              <td style="font-size:12px;color:var(--c-400);">Read-only</td>
+              <td style="font-size:12px;color:var(--c-500);">Jun 1, 2026</td>
+              <td style="font-size:12px;color:var(--c-500);">Jun 1, 2026</td>
+              <td><span class="badge b-green">Approved</span></td>
+              <td><a href="request-approved.html" class="btn btn-ghost btn-sm">View</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="../script/shared.js"></script>
+<script>
+var currentFilter = 'all';
+var currentYear = '';
+
+function apply() {
+  var rows = document.querySelectorAll('#hist-tbody tr');
+  rows.forEach(function(r) {
+    var s = r.getAttribute('data-status');
+    var y = r.getAttribute('data-year');
+    var show = (currentFilter === 'all' || s === currentFilter) && (!currentYear || y === currentYear);
+    r.style.display = show ? '' : 'none';
+  });
+}
+function filterHist(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.ftab').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  apply();
+}
+function filterYear(sel) {
+  currentYear = sel.value;
+  apply();
+}
+</script>
+</body>
+</html>
