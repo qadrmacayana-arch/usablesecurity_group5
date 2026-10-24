@@ -1,0 +1,140 @@
+<?php require_once __DIR__ . "/../includes/student-guard.php"; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request Approved — SecureAccess</title>
+<link rel="stylesheet" href="../style/shared.css">
+</head>
+<body data-page="access-requests">
+<div id="sidebar-overlay"></div>
+<div class="app-shell">
+  <aside id="sidebar"></aside>
+  <div class="main-area">
+    <div id="top-bar" data-title="Request Detail"></div>
+    <div class="page-content fade-in">
+
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px;">
+        <a href="access-requests.php" class="btn btn-ghost btn-sm">← Back</a>
+        <span style="color:var(--c-600);">/</span>
+        <span
+          id="approved-request-id"
+          style="font-size:13px;color:var(--c-400);"
+          class="mono"
+        ></span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start;">
+
+        <div>
+          <div class="card" style="margin-bottom:20px;">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:20px;">
+              <div>
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+                  <h1 id="approved-resource" style="font-size:20px;font-weight:800;color:#fff;margin:0;">Loading resource…</h1>
+                  <span id="approved-security" class="pip pip-standard">Loading…</span>
+                </div>
+                <p
+                  id="approved-request-meta"
+                  class="mono"
+                  style="font-size:12px;color:var(--c-500);margin:0;"
+                ></p>
+              </div>
+              <div style="text-align:right;">
+                <span class="stamp stamp-approved">Approved</span>
+              </div>
+            </div>
+
+            <!-- Approval notice -->
+            <div style="background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.25);border-radius:10px;padding:16px;margin-bottom:20px;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                <svg width="16" height="16" fill="none" stroke="#34d399" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span style="font-size:13px;font-weight:600;color:#34d399;">Access Granted</span>
+              </div>
+              <p style="font-size:12px;color:var(--c-500);margin:0 0 12px;">Your request was approved by the administrator. Access is now active and will expire on the date shown.</p>
+              <!-- Progress bar -->
+              <div style="display:flex;gap:0;align-items:center;">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+                  <div style="width:24px;height:24px;border-radius:50%;background:var(--c-indigo);display:flex;align-items:center;justify-content:center;">
+                    <svg width="12" height="12" fill="none" stroke="#fff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                  </div>
+                  <span style="font-size:10px;color:var(--c-500);">Submitted</span>
+                </div>
+                <div style="flex:1;height:2px;background:var(--c-indigo);margin:0 6px 16px;"></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+                  <div style="width:24px;height:24px;border-radius:50%;background:var(--c-indigo);display:flex;align-items:center;justify-content:center;">
+                    <svg width="12" height="12" fill="none" stroke="#fff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                  </div>
+                  <span style="font-size:10px;color:var(--c-500);">Reviewed</span>
+                </div>
+                <div style="flex:1;height:2px;background:var(--c-indigo);margin:0 6px 16px;"></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+                  <div style="width:24px;height:24px;border-radius:50%;background:var(--c-indigo);display:flex;align-items:center;justify-content:center;">
+                    <svg width="12" height="12" fill="none" stroke="#fff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                  </div>
+                  <span style="font-size:10px;color:#34d399;font-weight:600;">Approved</span>
+                </div>
+                <div style="flex:1;height:2px;background:var(--c-indigo);margin:0 6px 16px;"></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+                  <div style="width:24px;height:24px;border-radius:50%;background:#34d399;display:flex;align-items:center;justify-content:center;">
+                    <svg width="12" height="12" fill="none" stroke="#fff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+                  </div>
+                  <span style="font-size:10px;color:#34d399;font-weight:600;">Active</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+              <div><p class="lbl">Permission Type</p><p id="approved-permission" style="color:var(--c-200);font-size:13px;">Loading…</p></div>
+              <div><p class="lbl">Access Duration</p><p id="approved-duration" style="color:var(--c-200);font-size:13px;">Loading…</p></div>
+              <div><p class="lbl">Access Start</p><p id="approved-start" style="color:var(--c-200);font-size:13px;">Loading…</p></div>
+              <div><p class="lbl">Access Expires</p><p id="approved-expires" style="color:var(--c-orange);font-size:13px;font-weight:600;">Loading…</p></div>
+              <div><p class="lbl">Approved By</p><p id="approved-by" style="color:var(--c-200);font-size:13px;">Loading…</p></div>
+              <div><p class="lbl">Approval Date</p><p id="approved-date" style="color:var(--c-200);font-size:13px;">Loading…</p></div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:20px;">
+            <h2 style="font-size:14px;font-weight:700;color:var(--c-100);margin:0 0 12px;">Reviewer Notes</h2>
+            <p style="font-size:13px;color:var(--c-400);line-height:1.7;margin:0;">Request approved. Student has demonstrated valid academic need for Digital Library access. Standard read-only access granted for 30-day period in accordance with student privilege level. Please renew prior to expiration if continued access is required.</p>
+          </div>
+
+          <div class="card">
+            <h2 style="font-size:14px;font-weight:700;color:var(--c-100);margin:0 0 12px;">Access Justification</h2>
+            <p style="font-size:13px;color:var(--c-400);line-height:1.7;margin:0;">I need access to the digital library to retrieve academic journals and research papers required for my thesis on distributed systems. The library provides access to IEEE, ACM, and Springer collections that are not available through public channels.</p>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="card">
+            <h3 style="font-size:13px;font-weight:700;color:var(--c-300);margin:0 0 14px;">Request Info</h3>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div><p style="font-size:11px;color:var(--c-500);margin:0;">Status</p><div style="margin-top:4px;"><span id="approved-info-status" class="badge b-green">Loading…</span></div></div>
+              <div><p style="font-size:11px;color:var(--c-500);margin:0;">Access Status</p><div style="margin-top:4px;"><span id="approved-info-access-status" class="badge b-green">Loading…</span></div></div>
+              <div><p style="font-size:11px;color:var(--c-500);margin:0;">Expires</p><p id="approved-info-expires" style="font-size:13px;color:var(--c-orange);margin:4px 0 0;font-weight:600;">Loading…</p></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3 style="font-size:13px;font-weight:700;color:var(--c-300);margin:0 0 12px;">Student</h3>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+              <div class="avatar">AC</div>
+              <div><p style="font-size:13px;font-weight:600;color:var(--c-200);margin:0;">Loading student…</p><p style="font-size:11px;color:var(--c-500);margin:2px 0 0;">—</p></div>
+            </div>
+          </div>
+          <a href="credential.php" class="btn btn-primary" style="justify-content:center;">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"/></svg>
+            View Credential Card
+          </a>
+          <a href="access-requests.php" class="btn btn-ghost" style="justify-content:center;">← Back to Requests</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../script/supabase-client.js"></script>
+<script src="../script/shared.js"></script>
+<script src="../script/pages/request-approved.js"></script>
+</body>
+</html>

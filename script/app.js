@@ -1,8 +1,8 @@
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 
 var student = {
-  name: "Alexandra Chen", id: "STU-2024-0847", program: "Computer Science",
-  year: "3rd Year", gpa: "3.82", email: "a.chen@university.edu",
+  name: "Alexandra Chen", id: "2024-112234", program: "Computer Science",
+  year: "3rd Year", gpa: "3.82", email: "a.chen@university.edu.ph",
   phone: "+1 (555) 204-8731", initials: "AC", status: "Active",
   clearanceLevel: "Level 3 – Standard",
 };
@@ -180,7 +180,7 @@ function renderLogin() {
     inner = '<div class="space-y">'
       +'<div><div style="font-size:18px;font-weight:700;color:#fff;">Sign In</div>'
       +'<div style="font-size:13px;color:#64748b;margin-top:2px;">Authentication — enter your student credentials</div></div>'
-      +'<div><label class="lbl">Student ID</label><input class="inp" type="text" id="inp-id" value="STU-2024-0847" placeholder="STU-YYYY-XXXX"></div>'
+      +'<div><label class="lbl">Student ID</label><input class="inp" type="text" id="inp-id" value="2024-112234" placeholder="YYYY-NNNNNN"></div>'
       +'<div><label class="lbl">Password</label><input class="inp" type="password" id="inp-pw" value="secret1234" placeholder="Enter password"></div>'
       +'<button onclick="handleCredentials()" class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;font-size:14px;border-radius:12px;">'
       +svgIcon("M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1")
